@@ -1,3 +1,5 @@
 ## Your module
 
-Write some help for your users here!
+Adder CCS-Pro (4 or 8 port models)
+
+Control your CCS-Pro KVM using the network interface.
