@@ -20,13 +20,10 @@ module.exports = function (self) {
 			],
 			callback: async (event) => {
 				// send http command to swap to input
-				console.log(`http://${self.config.host}/cgi-bin/channel?km=${event.options.kvm}`);
-				return;
-
 				return fetch(`http://${self.config.host}/cgi-bin/channel?km=${event.options.kvm}`).then(() => {
-					console.log("request complete");
+					self.checkFeedbacks('KVM_Active_Input')
 				}, () => {
-					console.log("request failed");
+					console.log("Update failed");
 				})
 			}
 		},
@@ -50,13 +47,10 @@ module.exports = function (self) {
 			],
 			callback: async (event) => {
 				// send http command to swap to input
-				console.log(`http://${self.config.host}/cgi-bin/channel?spk=${event.options.spk}`);
-				return;
-
 				return fetch(`http://${self.config.host}/cgi-bin/channel?spk=${event.options.spk}`).then(() => {
-					console.log("request complete");
+					self.checkFeedbacks('SPK_Active_Input')
 				}, () => {
-					console.log("request failed");
+					console.log("Update failed");
 				})
 			}
 		},
@@ -80,13 +74,10 @@ module.exports = function (self) {
 			],
 			callback: async (event) => {
 				// send http command to swap to input
-				console.log(`http://${self.config.host}/cgi-bin/channel?usb1=${event.options.usb1}`);
-				return;
-
 				return fetch(`http://${self.config.host}/cgi-bin/channel?usb1=${event.options.usb1}`).then(() => {
-					console.log("request complete");
+					self.checkFeedbacks('USB1_Active_Input')
 				}, () => {
-					console.log("request failed");
+					console.log("Update failed");
 				})
 			}
 		},
@@ -110,13 +101,10 @@ module.exports = function (self) {
 			],
 			callback: async (event) => {
 				// send http command to swap to input
-				console.log(`http://${self.config.host}/cgi-bin/channel?usb2=${event.options.usb2}`);
-				return;
-
 				return fetch(`http://${self.config.host}/cgi-bin/channel?usb2=${event.options.usb2}`).then(() => {
-					console.log("request complete");
+					self.checkFeedbacks('USB2_Active_Input')
 				}, () => {
-					console.log("request failed");
+					console.log("Update failed");
 				})
 			}
 		},
@@ -192,13 +180,10 @@ module.exports = function (self) {
 					return
 				}
 
-				console.log(`http://${self.config.host}/cgi-bin/channel${queries}`);
-				return;
-
-				return fetch(`http://${self.config.host}/cgi-bin/channel?usb1=${event.options.usb1}`).then(() => {
-					console.log("request complete");
+				return fetch(`http://${self.config.host}/cgi-bin/channel${queries}`).then(() => {
+					// Call to update feedbacks
 				}, () => {
-					console.log("request failed");
+					console.log("Update failed");
 				})
 			}
 		}
