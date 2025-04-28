@@ -21,6 +21,7 @@ module.exports = function (self) {
 			callback: async (event) => {
 				// send http command to swap to input
 				return fetch(`http://${self.config.host}/cgi-bin/channel?km=${event.options.kvm}`).then(() => {
+					self.config.status["km"] = event.options.kvm;
 					self.checkFeedbacks('KVM_Active_Input')
 				}, () => {
 					console.log("Update failed");

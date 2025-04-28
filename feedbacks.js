@@ -24,32 +24,9 @@ module.exports = async function (self) {
 			],
 			callback: async (feedback, context) => {
 				// Note: make sure to use `parseVariablesInString` from `context`. That lets Companion know what feedback the call was for
-				const input = await context.parseVariablesInString(feedback.options.input)
-				let status = (await fetch(`http://${self.config.host}/status.json`)).text().then(
-					(result) =>
-					{
-						try {
-							resultData = JSON.parse(result);
-							let currentValue = resultData.find(item => Object.getOwnPropertyNames(item).indexOf("km") != -1);
-
-							if (currentValue.km == feedback.options.input)
-							{
-								return true
-							}
-							else
-							{
-								return false
-							}
-						} catch (error) {
-							console.log(error);
-							return false
-						}
-					},
-					() => {
-						return false
-					});
-
-					return status;
+				const input = await context.parseVariablesInString(feedback.options.input);
+				let status = (self.config.status["km"] == input);
+				return status;
 			}
 		},
 		SPK_Active_Input: {
@@ -73,31 +50,8 @@ module.exports = async function (self) {
 			callback: async (feedback, context) => {
 				// Note: make sure to use `parseVariablesInString` from `context`. That lets Companion know what feedback the call was for
 				const input = await context.parseVariablesInString(feedback.options.input)
-				let status = (await fetch(`http://${self.config.host}/status.json`)).text().then(
-					(result) =>
-					{
-						try {
-							resultData = JSON.parse(result);
-							let currentValue = resultData.find(item => Object.getOwnPropertyNames(item).indexOf("spk") != -1);
-
-							if (currentValue.spk == feedback.options.input)
-							{
-								return true
-							}
-							else
-							{
-								return false
-							}
-						} catch (error) {
-							console.log(error);
-							return false
-						}
-					},
-					() => {
-						return false
-					});
-
-					return status;
+				let status = (self.config.status["spk"] == input);
+				return status;
 			}
 		},
 		USB1_Active_Input: {
@@ -121,31 +75,8 @@ module.exports = async function (self) {
 			callback: async (feedback, context) => {
 				// Note: make sure to use `parseVariablesInString` from `context`. That lets Companion know what feedback the call was for
 				const input = await context.parseVariablesInString(feedback.options.input)
-				let status = (await fetch(`http://${self.config.host}/status.json`)).text().then(
-					(result) =>
-					{
-						try {
-							resultData = JSON.parse(result);
-							let currentValue = resultData.find(item => Object.getOwnPropertyNames(item).indexOf("usb1") != -1);
-
-							if (currentValue.usb1 == feedback.options.input)
-							{
-								return true
-							}
-							else
-							{
-								return false
-							}
-						} catch (error) {
-							console.log(error);
-							return false
-						}
-					},
-					() => {
-						return false
-					});
-
-					return status;
+				let status = (self.config.status["usb1"] == input);
+				return status;
 			}
 		},
 		USB2_Active_Input: {
@@ -169,31 +100,8 @@ module.exports = async function (self) {
 			callback: async (feedback, context) => {
 				// Note: make sure to use `parseVariablesInString` from `context`. That lets Companion know what feedback the call was for
 				const input = await context.parseVariablesInString(feedback.options.input)
-				let status = (await fetch(`http://${self.config.host}/status.json`)).text().then(
-					(result) =>
-					{
-						try {
-							resultData = JSON.parse(result);
-							let currentValue = resultData.find(item => Object.getOwnPropertyNames(item).indexOf("usb2") != -1);
-
-							if (currentValue.usb2 == feedback.options.input)
-							{
-								return true
-							}
-							else
-							{
-								return false
-							}
-						} catch (error) {
-							console.log(error);
-							return false
-						}
-					},
-					() => {
-						return false
-					});
-
-					return status;
+				let status = (self.config.status["usb2"] == input);
+				return status;
 			}
 		}
 	})
